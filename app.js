@@ -13,16 +13,28 @@ nunjucks.configure('views', {noCache: true})  //using nunjucks to render.
 app.set('view engine','html')
 app.engine('html',nunjucks.render)
 
-models.User.sync({})
-.then(function () {
-  return models.Page.sync({})
-})
+/// **** THE BELOW IS FOR SYNCING THE ENTIRE DATABASE, WHICH INCLUDES ALL MODELS...
+
+models.db.sync({})
 .then(function () {
   app.listen(PORT, function(){
     console.log('Our server is on!')
   })
 })
 .catch(console.error)
+
+
+/// **** THE BELOW IS FOR SYNCING ONE MODEL AT A TIME...
+// models.User.sync({})
+// .then(function () {
+//   return models.Page.sync({})
+// })
+// .then(function () {
+//   app.listen(PORT, function(){
+//     console.log('Our server is on!')
+//   })
+// })
+// .catch(console.error)
 
 
 
