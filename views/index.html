@@ -4,6 +4,11 @@
   <h3>Pages</h3>
   <hr>
   <ul class="list-unstyled">
+    <h1> hello </h1>
+      {% for page in pages %}
+    <li><a href="#">{{page.title}}</a></li>
+      {% endfor %}
+
     <!-- PLACEHOLDER LIST OF PAGES -->
   </ul>
 {% endblock %}

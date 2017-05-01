@@ -6,6 +6,7 @@ const app = express()
 const routes = require('./routes')
 const bodyParser  = require('body-parser')
 var models = require('./models');
+var Page = models.Page
 var PORT = 3000
 
 
@@ -29,6 +30,8 @@ models.db.sync({})
 .catch(console.error)
 
 // app.use('/', bodyParser)
+
+
 app.use('/', routes)
 
 
@@ -44,8 +47,10 @@ app.use('/', routes)
 // })
 // .catch(console.error)
 
-
-
 app.get('/', function(req,res,next){
-    res.render('index')
+    Page.findAll()
+    .then(function(pages){
+      console.log(pages.dataValues.title)
+      res.render('index', pages)    
+    })
 })

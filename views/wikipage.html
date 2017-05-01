@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <h3>{{renderObject.title}} <small> (<a href="{{renderObject.urltitle}}/similar">Similar</a>)</small></h3>
+  <h3>{{title}} <small> (<a href="{{renderObject.urltitle}}/similar">Similar</a>)</small></h3>
   <h4>by <a href="PLACEHOLDER-AUTHOR-URL">PLACEHOLDER AUTHOR URL</a></h4>
   <div>PLACEHOLDER TAG LIST</div>
   <hr/>
   <div>PLACEHOLDER AUTHOR NAME WITH LINK TO AUTHOR PAGE</div>
-  <div class="page-body">{{renderObject.content}}</div>
+  <div class="page-body">{{content}}</div>
   <hr/>
-  <a href="{{renderObject.urltitle}}/edit" class="btn btn-primary">edit this page</a>
-  <a href="{{renderObject.urltitle}}/delete" class="btn btn-danger">delete this page</a>
+  <a href="{{urltitle}}/edit" class="btn btn-primary">edit this page</a>
+  <a href="{{urltitle}}/delete" class="btn btn-danger">delete this page</a>
 {% endblock %}

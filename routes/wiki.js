@@ -17,20 +17,18 @@ router.post('/',function(req,res,next){
       title: req.body.title,
       content: req.body.content
     })
-
-
     // console.log('got POST request!')
     // console.log(req.body)
     // res.json(req.body)
-    page.save()
+    page.save().then(function(savedPage){
+      res.redirect(savedPage.route); // route virtual FTW
+    }).catch(next);
     // page.save().then(function(result){
     //   res.json(result)
-    // });
-
+    // })
     // res.jsons a page saved to the databas ^^^
     // res.redirect('/')
-    res.json(req.body)
-    next()
+    // next()
 })
 
 
@@ -48,8 +46,14 @@ router.get('/:urltitle', function (req, res, next) {
   })
   .then(function(foundPage){
     // res.json(foundPage);
+    // console.log(foundPage)
     var renderObject = foundPage;
-    res.render('wikipage', renderObject);
+    console.log(renderObject.urltitle, renderObject.title, renderObject.content)
+    res.render('wikipage', {
+      title: renderObject.title,
+      urltitle: renderObject.urltitle,
+      content:  renderObject.content
+    });
   })
   .catch(next);
 
