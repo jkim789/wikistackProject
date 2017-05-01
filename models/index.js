@@ -5,18 +5,18 @@ var db = new Sequelize('postgres://localhost:5433/wikistack', {
 
 var Page = db.define('page', {
   title: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
     allowNull: false
   },
   urltitle: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
     validate: {
       isUrl: true
     }
   },
   content: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
     allowNull: false
   },
   status: {
@@ -27,9 +27,10 @@ var Page = db.define('page', {
   date: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
-  },
+  }
+}, {
   getterMethods: {
-    route: this.urltitle + '/wiki/'
+    route:  '/wiki/'+ this.urltitle
   }
 })
 

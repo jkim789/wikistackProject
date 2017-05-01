@@ -3,11 +3,16 @@ const morgan = require('morgan')
 const nunjucks = require('nunjucks')
 const path = require('path')
 const app = express()
+const routes = require('./routes')
+const bodyParser  = require('body-parser')
 var models = require('./models');
 var PORT = 3000
 
+
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(morgan('dev'))
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json())
 
 nunjucks.configure('views', {noCache: true})  //using nunjucks to render.
 app.set('view engine','html')
@@ -22,6 +27,9 @@ models.db.sync({})
   })
 })
 .catch(console.error)
+
+// app.use('/', bodyParser)
+app.use('/', routes)
 
 
 /// **** THE BELOW IS FOR SYNCING ONE MODEL AT A TIME...
